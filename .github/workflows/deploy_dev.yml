@@ -23,7 +23,7 @@ jobs:
       - name: Calculate new tag
         id: new_tag
         run: |
-          last_tag=$GITHUB_REF
+          last_tag=$LAST_TAG
           version=${last_tag#refs/tags/v}  # Remove "refs/tags/v" prefix
           IFS='.' read -ra parts <<< "$version"  # Split into array using "."
           major="${parts[0]}"  # Major version part
