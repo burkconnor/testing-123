@@ -1,0 +1,38 @@
+name: Increment Tag
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  increment-tag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get last tag
+        id: last_tag
+        run: |
+          last_tag=$(git describe --tags --abbrev=0)
+          echo "::set-output name=tag::$last_tag"
+
+      - name: Calculate new tag
+        id: new_tag
+        run: |
+          last_tag=$GITHUB_REF
+          version=${last_tag#refs/tags/v}  # Remove "refs/tags/v" prefix
+          IFS='.' read -ra parts <<< "$version"  # Split into array using "."
+          minor=$((parts[1] + 1))  # Increment the minor version part
+          new_tag="v${parts[0]}.$minor.0"
+          echo "::set-output name=tag::$new_tag"
+
+      - name: Increment and push tag
+        run: |
+          new_tag=$TAG
+          git tag "$new_tag"
+          git push origin "$new_tag"
+        env:
+          TAG: ${{ steps.new_tag.outputs.tag }}
