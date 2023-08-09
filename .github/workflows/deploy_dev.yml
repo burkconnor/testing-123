@@ -26,9 +26,9 @@ jobs:
           last_tag=$LAST_TAG
           version=${last_tag#refs/tags/v}  # Remove "refs/tags/v" prefix
           IFS='.' read -ra parts <<< "$version"  # Split into array using "."
-          major="${parts[0]}"  # Major version part
-          minor=$(parts[1])  # Increment the minor version part
-          patch=$((parts[2] + 1))  # Reset the patch version part
+          major=${parts[0]}  # Major version part
+          minor=${parts[1]}  # Increment the minor version part
+          patch=((parts[2}++))  # Reset the patch version part
           new_tag="v$major.$minor.$patch"
           echo "::set-output name=tag::$new_tag"
 
