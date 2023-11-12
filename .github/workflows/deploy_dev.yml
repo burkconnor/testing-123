@@ -16,5 +16,6 @@ jobs:
 
       - name: print commit sha
         run: |
+          echo "testiong"
           echo $COMMIT_SHA
   
