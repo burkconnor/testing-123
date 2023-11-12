@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: set variable
       - run: echo "::set-output name=tag::$(date +%Y%m%d%H%M%S)"
-        id: set_tag
+
 
       - name: print variable
         run: echo "${{ steps.set_tag.outputs.tag }}"
