@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Get commit sha associated with tag
         run: |
-          commit_sha=(git rev-list -n 1 v0.0.1)
+          commit_sha=$(git rev-list -n 1 v0.0.1)
           echo "COMMIT_SHA=${commit_sha}" >> $GITHUB_ENV
 
       - name: print commit sha
