@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: set variable
-      - run: echo "::set-output name=tag::$(date +%Y%m%d%H%M%S)"
+        run: echo "::set-output name=tag::$(date +%Y%m%d%H%M%S)"
 
 
       - name: print variable
