@@ -9,10 +9,12 @@ jobs:
   test_1:
     runs-on: ubuntu-latest
     steps:
-      - name: set variable
-        run: echo "::set-output name=tag::$(date +%Y%m%d%H%M%S)"
+      - name: Get commit sha associated with tag
+        run: |
+          commit_sha=(git rev-list -n 1 v0.0.1)
+          echo "COMMIT_SHA=${commit_sha}" >> $GITHUB_ENV
 
-
-      - name: print variable
-        run: echo "${{ steps.set_tag.outputs.tag }}"
+      - name: print commit sha
+        run: |
+          echo $COMMIT_SHA
   
