@@ -5,6 +5,8 @@ on:
       - main
 jobs:
   version_code_with_git_tag:
+    permissions:
+      contents: write
     timeout-minutes: 2
     outputs:
       new_tag: ${{ steps.tag_version.outputs.new_tag }}
